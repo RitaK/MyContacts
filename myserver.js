@@ -9,9 +9,9 @@ connectToDB();
 
 http.createServer(function(req, res) {
 	
-
-	if(req.url == "" || req.url == "index.html")
+	if(req.url == "/" || req.url == "/index.html" || req.url == "/main.js")
 	{
+
 		readFile(req.url, function(err, data){//data - the file's data
 			if(err)
 			{
@@ -26,6 +26,7 @@ http.createServer(function(req, res) {
 	else
 		if(req.url == "newContact")
 		{
+console.log(req.url);
 			var contact;
 			req.on('data', function (chunk) {
 			totalRequest+= chunk;
@@ -46,8 +47,8 @@ http.createServer(function(req, res) {
 
 function readFile(localPath, cb) {
 	
-	if(localPath === "")
-		localPath = "index.html";
+	if(localPath === "/")
+		localPath = "/index.html";
 
     filePath = path.join(__dirname, localPath);
 
@@ -58,10 +59,10 @@ function readFile(localPath, cb) {
 function connectToDB()
 {
 	var uristring = 
-  	process.env.MONGODB_URI || 'mongodb://localhost/MongooseContacts';
+  	process.env.MONGODB_URI || 'mongodb://localhost/MongoContacts';
 
 
-	var theport = process.env.PORT || 5000;
+	var theport = process.env.PORT || 27017;
 
 
 	mongoose.connect(uristring, function (err, res) {
@@ -86,15 +87,17 @@ function createNewContact(contact)
 {
 	//creating a contact
 	var newContact = new contactsModel ({
-	  contact: { name: contact.name, number: contact.number }
+	  contact: { contact : {name: contact.name, number: contact.number} }
 	});
 	newContact.save(function (error) {if (error) console.log ('Error when saving a new contact to the DB')});
+	console.log(newContact);
 	//return "OK";
 }
 
 function getAllContacts(res)
 {
 	contactsModel.find({},function(err, contacts) {
+	console.log(contacts);
   	res.end(contacts);
 	});
 }
