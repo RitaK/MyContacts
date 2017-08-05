@@ -37,6 +37,10 @@ http.createServer(function(req, res) {
 			var jsonContact = JSON.parse(contact);
 			createNewContact(jsonContact);
 		}
+		else if(req.url == "getContacts")
+		{
+			getAllContacts(res);
+		}
 }).listen(8080);
 
 
@@ -75,7 +79,7 @@ function connectToDB()
 	  }
 	});
 
-	contactsModel = mongoose.model('PowerUsers', contactsSchema);
+	contactsModel = mongoose.model('contact', contactsSchema);
 }
 
 function createNewContact(contact)
@@ -87,3 +91,11 @@ function createNewContact(contact)
 	newContact.save(function (error) {if (error) console.log ('Error when saving a new contact to the DB')});
 	//return "OK";
 }
+
+function getAllContacts(res)
+{
+	contactsModel.find({},function(err, contacts) {
+  	res.end(contacts);
+	});
+}
+
