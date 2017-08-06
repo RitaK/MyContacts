@@ -9,22 +9,7 @@ connectToDB();
 
 http.createServer(function(req, res) {
 	
-	if(req.url == "/" || req.url == "/index.html" || req.url == "/main.js")
-	{
-
-		readFile(req.url, function(err, data){//data - the file's data
-			if(err)
-			{
-				res.end("Path is incorrect.");
-			}
-			else
-			{
-				res.end(data);//response is file's data
-			}
-		});
-	}
-	else
-		if(req.url == "newContact")
+		if(req.url == "/newContact")
 		{
 console.log(req.url);
 			var contact;
@@ -35,12 +20,30 @@ console.log(req.url);
 			req.on('end', function () {
 			  contact = totalRequest;
 			});
-			var jsonContact = JSON.parse(contact);
-			createNewContact(jsonContact);
+			if(data)
+			{
+				console.log(contact);
+				var jsonContact = JSON.parse(contact);
+				createNewContact(jsonContact);
+			}
+			
 		}
-		else if(req.url == "getContacts")
+		else if(req.url == "/getContacts")
 		{
 			getAllContacts(res);
+		}
+		else
+		{
+			readFile(req.url, function(err, data){//data - the file's data
+				if(err)
+				{
+					res.end("Path is incorrect.");
+				}
+				else
+				{
+					res.end(data);//response is file's data
+				}
+			});
 		}
 }).listen(8080);
 

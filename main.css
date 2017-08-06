@@ -1,0 +1,28 @@
+.columns {
+
+    background-color: white;
+    color: black;
+	overflow: hidden;
+}
+.columns:hover {
+    background-color: #0099cc;
+}
+
+.contacts-info{
+    margin: 0 auto;
+    padding: 0;
+}
+
+header{
+	margin: 3% 0 3% 0;
+	box-shadow: 0 1px 3px 0 grey;
+    
+}
+
+.content-wrapper{
+	margin: 0 3% 0 3%;
+}
+
+h2{
+	margin:0;
+}
