@@ -10,19 +10,34 @@
 
 .contacts-info{
     margin: 0 auto;
-    padding: 0;
+    padding-top: 20px;
 }
 
 header{
-	margin: 3% 0 3% 0;
 	box-shadow: 0 1px 3px 0 grey;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 0 0 5px 0;
+    padding-bottom: 30px;
     
-}
-
-.content-wrapper{
-	margin: 0 3% 0 3%;
 }
 
 h2{
 	margin:0;
+}
+
+#title{
+	padding-top: 30px;
+}
+
+#addUserBtn{
+	background-color: white;
+	float: right;
+    margin: 20px;
+}
+
+#addUserBtn:hover {
+    color: #FA8072;
+    background-color: #C0C0C0;
+    border-color: #204d74;
 }
