@@ -15,24 +15,9 @@ http.createServer(function(req, res) {
 			console.log(query);
 			createNewContact(query);
 		}
-			
-		if(req.url == "/newContact")
+		else if(req.url == "/newContact")
 		{
-			var contact;
-			req.on('data', function (chunk) {
-			totalRequest+= chunk;
-			});
-
-			req.on('end', function () {
-			  contact = totalRequest;
-			});
-			if(data)
-			{
-				console.log(contact);
-				var jsonContact = JSON.parse(contact);
-				createNewContact(jsonContact);
-			}
-
+			getAllContacts(res);
 			
 		}
 		else if(req.url == "/getContacts")
@@ -98,7 +83,7 @@ function createNewContact(contact)
 {
 	//creating a contact
 	var newContact = new contactsModel ({
-	  contact: { contact : {name: contact.name, number: contact.number, email: contact.email} }
+	  contact: { name: contact.name, number: contact.number, email: contact.email }
 	});
 	newContact.save(function (err) {
         if (err) { 
@@ -115,9 +100,9 @@ function createNewContact(contact)
 
 function getAllContacts(res)
 {
-	contactsModel.find({},function(err, contacts) {
-	console.log(contacts);
-  	res.end(contacts);
+	 var query = contactsModel.find({});
+	 query.exec(function (err, docs) {
+	  console.log(docs);
 	});
 }
 

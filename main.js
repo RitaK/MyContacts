@@ -1,7 +1,7 @@
 
 var contacts;
 //GetAllContacts();
-
+getAllContacts();
 
 function createContact(contactName, contactNumder, contactEmail)
 {
@@ -16,11 +16,8 @@ function addContactRowToGrid(contact)
 }
 
 
-/*function PostContactData(contact) {
-	$.post("vm029600.cloudapp.net:8080/newContact",
-    contact,
-    function(data, status){
+function getAllContacts() {
+    $.get("http://vm029600.cloudapp.net:8080/getContacts", function(data, status){
         alert("Data: " + data + "\nStatus: " + status);
     });
-}*/
-
+}
