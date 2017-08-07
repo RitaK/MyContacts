@@ -12,13 +12,7 @@ http.createServer(function(req, res) {
 	var url_parts = url.parse(req.url, true);
 			var query = url_parts.query;
 		if(query.name){
-			console.log(query);
-			createNewContact(query);
-		}
-		else if(req.url == "/newContact")
-		{
-			getAllContacts(res);
-			
+			createNewContact(query, res);
 		}
 		else if(req.url == "/getContacts")
 		{
@@ -79,7 +73,7 @@ function connectToDB()
 	contactsModel = mongoose.model('contact', contactsSchema);
 }
 
-function createNewContact(contact)
+function createNewContact(contact, res)
 {
 	//creating a contact
 	var newContact = new contactsModel ({
@@ -93,16 +87,26 @@ function createNewContact(contact)
             console.log(newContact);
         }
     });
-	newContact.save(function (error) {if (error) console.log ('Error when saving a new contact to the DB')});
+
+	//newContact.save(function (error) {if (error) console.log ('Error when saving a new contact to the DB')});
+
+	var buf = new Buffer.from(JSON.stringify(newContact));
+	res.end(buf);
+
 	//console.log(newContact);
 	//return "OK";
 }
 
 function getAllContacts(res)
 {
-	 var query = contactsModel.find({});
-	 query.exec(function (err, docs) {
-	  console.log(docs);
+	var contacts;
+	var query = contactsModel.find({});
+	query.exec(function (err, docs) {
+	console.log(docs);
+	contacts = docs;
 	});
+	/*var buf = new Buffer.from(JSON.stringify(contacts));
+	res.end(buf);*/ // need to continue tomorrow!!!!!!!!!!!!!!!!!!!!!!!!!!
+	res.end();
 }
 
