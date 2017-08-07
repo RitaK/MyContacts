@@ -15,7 +15,7 @@
 .contacts-info{
     margin: 0 auto;
     position: absolute;
-    top: 96px;
+    top: 160px;
     left: 0px;
     right: 0px;
     bottom: 0px;
@@ -34,6 +34,7 @@ header{
 
 h2{
 	margin:0;
+	float: left;
 }
 
 body{
@@ -59,4 +60,21 @@ body{
     color: #FA8072;
     background-color: #C0C0C0;
     border-color: #204d74;
+}
+
+#searchBar {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    float:right;
+}
+
+#searchBar:focus {
+    width: 600px;
 }

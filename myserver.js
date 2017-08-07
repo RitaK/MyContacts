@@ -1,6 +1,7 @@
 var http = require('http');
 var fs = require('fs');
-var path = require('path');  
+var path = require('path'); 
+var url = require('url'); 
 
 var mongoose = require('mongoose');
 var contactsModel;
@@ -8,10 +9,15 @@ var contactsModel;
 connectToDB();
 
 http.createServer(function(req, res) {
-	
+	var url_parts = url.parse(req.url, true);
+			var query = url_parts.query;
+		if(query.name){
+			console.log(query);
+			createNewContact(query);
+		}
+			
 		if(req.url == "/newContact")
 		{
-console.log(req.url);
 			var contact;
 			req.on('data', function (chunk) {
 			totalRequest+= chunk;
@@ -26,6 +32,7 @@ console.log(req.url);
 				var jsonContact = JSON.parse(contact);
 				createNewContact(jsonContact);
 			}
+
 			
 		}
 		else if(req.url == "/getContacts")
@@ -79,7 +86,8 @@ function connectToDB()
 	var contactsSchema = new mongoose.Schema({
 	  contact: {
 	    name: String,
-	    number: String
+	    number: String,
+	    email: String
 	  }
 	});
 
@@ -90,10 +98,18 @@ function createNewContact(contact)
 {
 	//creating a contact
 	var newContact = new contactsModel ({
-	  contact: { contact : {name: contact.name, number: contact.number} }
+	  contact: { contact : {name: contact.name, number: contact.number, email: contact.email} }
 	});
+	newContact.save(function (err) {
+        if (err) { 
+            console.log ('Error when saving a new contact to the DB');
+        }
+        else {
+            console.log(newContact);
+        }
+    });
 	newContact.save(function (error) {if (error) console.log ('Error when saving a new contact to the DB')});
-	console.log(newContact);
+	//console.log(newContact);
 	//return "OK";
 }
 
