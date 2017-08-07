@@ -3,6 +3,8 @@
     background-color: white;
     color: black;
 	overflow: hidden;
+	float: left;
+    width: 33.33333333%;
 }
 .columns:hover {
     background-color: #0099cc;
@@ -34,6 +36,9 @@ h2{
 	background-color: white;
 	float: right;
     margin: 20px;
+    top: 80%;
+    left: 80%;
+    position: fixed;
 }
 
 #addUserBtn:hover {
