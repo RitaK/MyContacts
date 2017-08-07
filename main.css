@@ -1,18 +1,25 @@
-.columns {
+.cell {
 
     background-color: white;
     color: black;
 	overflow: hidden;
 	float: left;
     width: 33.33333333%;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-.columns:hover {
-    background-color: #0099cc;
+.cell:hover {
+    background-color: #DCDCDC;
 }
 
 .contacts-info{
     margin: 0 auto;
-    padding-top: 20px;
+    position: absolute;
+    top: 96px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow-y: scroll;
 }
 
 header{
@@ -21,11 +28,18 @@ header{
     padding-left: 15px;
     margin: 0 0 5px 0;
     padding-bottom: 30px;
-    
+    position:fixed;
+    width:100%;
 }
 
 h2{
 	margin:0;
+}
+
+body{
+	font-family: 'Patua One', cursive;
+    line-height: 3rem;
+    font-size: 16px;
 }
 
 #title{
