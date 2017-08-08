@@ -102,11 +102,10 @@ function getAllContacts(res)
 	var contacts;
 	var query = contactsModel.find({});
 	query.exec(function (err, docs) {
-	console.log(docs);
-	contacts = docs;
+	var buf2 = new Buffer.from(JSON.stringify(docs));
+	res.end(buf2);
 	});
-	/*var buf = new Buffer.from(JSON.stringify(contacts));
-	res.end(buf);*/ // need to continue tomorrow!!!!!!!!!!!!!!!!!!!!!!!!!!
-	res.end();
+
+	//res.end();
 }
 
