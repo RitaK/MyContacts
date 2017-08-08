@@ -29,3 +29,24 @@ function fillTableWithContacts(contacts){
 	'</div>');
 	}
 }
+
+//Filtering and presenting only cntacts relevent to search. In sescending order.
+function searchFilter() {
+    var input, filter, row, i, name;
+    input = $('#searchBar');
+    if(input[0])
+    {
+    	filter = input[0].value.toUpperCase();
+    	var rows = $('.contact-row');
+
+    for (i = 0; i < rows.length; i++) {
+	        name = rows[i].firstChild.innerText;
+	        if (name.toUpperCase().indexOf(filter) > -1) {
+	            rows[i].style.display = "";
+	        } else {
+	            rows[i].style.display = "none";
+	        }
+    	}
+    }
+    
+}
