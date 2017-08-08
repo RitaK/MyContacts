@@ -99,21 +99,40 @@ function createNewContact(contact, res)
         }
         else {
             console.log(newContact);
+            readFile("/index.html", function(err, data){//data - the file's data
+				if(err)
+				{
+					res.end("Path is incorrect.");
+				}
+				else
+				{
+					res.end(data);//response is file's data
+				}
+			});
         }
     });
-
-	buf = new Buffer.from(JSON.stringify(newContact));
-	res.end(buf);
 }
 
 function getAllContacts(res)
 {
 	var contacts;
-	var query = contactsModel.find({}).sort({"contact.name" : 1});//get all documents for decending order according to contact's name
+	var buf;
+	var query = contactsModel.find({}).sort({"contact.name" : 1});//get all documents for descending order according to contact's name
 	query.exec(function (err, docs) {
-	var buf2 = new Buffer.from(JSON.stringify(docs));
-	console.log(docs);
-	res.end(buf2);
+		if (err) 
+		{ 
+			var errMessage = err.message;
+			console.log(errMessage);//printing to log the error message
+			buf = new Buffer.from(JSON.stringify(err.code));//sending the client the error code
+			res.end(buf);
+		}
+		else
+		{
+			buf = new Buffer.from(JSON.stringify(docs));
+			console.log(docs);
+			res.end(buf);
+		}
+	
 	});
 }
 
