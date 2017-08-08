@@ -81,7 +81,7 @@ function createNewContact(contact, res)
 	  contact: { name: contact.name, number: contact.number, email: contact.email }
 	});
 	newContact.save(function (err) {
-        if (err) { code: 11000
+        if (err) { 
         	if(err.code === 11000)
         	{
         		var errMessage = 'A contact with this name already exists.';
@@ -109,7 +109,7 @@ function createNewContact(contact, res)
 function getAllContacts(res)
 {
 	var contacts;
-	var query = contactsModel.find({});
+	var query = contactsModel.find({}).sort({"contact.name" : 1});//get all documents for decending order according to contact's name
 	query.exec(function (err, docs) {
 	var buf2 = new Buffer.from(JSON.stringify(docs));
 	console.log(docs);
