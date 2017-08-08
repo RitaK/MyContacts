@@ -17,7 +17,9 @@ function addContactRowToGrid(contact)
 
 
 function getAllContacts() {
-    $.get("http://vm029600.cloudapp.net:8080/getContacts", function(data, status){
+    var result = $.get("http://vm029600.cloudapp.net:8080/getContacts", function(data, status){
         alert("Data: " + data + "\nStatus: " + status);
+        console.log(data + "     "+ status);
     });
+
 }

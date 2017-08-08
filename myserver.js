@@ -64,7 +64,7 @@ function connectToDB()
 
 	var contactsSchema = new mongoose.Schema({
 	  contact: {
-	    name: String,
+	    name: {type: String, unique: true, index: true},
 	    number: String,
 	    email: String
 	  }
@@ -75,26 +75,35 @@ function connectToDB()
 
 function createNewContact(contact, res)
 {
+	var buf;
 	//creating a contact
 	var newContact = new contactsModel ({
 	  contact: { name: contact.name, number: contact.number, email: contact.email }
 	});
 	newContact.save(function (err) {
-        if (err) { 
-            console.log ('Error when saving a new contact to the DB');
+        if (err) { code: 11000
+        	if(err.code === 11000)
+        	{
+        		var errMessage = 'A contact with this name already exists.';
+        		console.log (errMessage);
+        		buf = new Buffer.from(JSON.stringify(errMessage));
+				res.end(buf);
+        	}
+        	else
+        	{
+        		var errMessage  = 'Error when saving a new contact to the DB';
+        		console.log (errMessage);
+        		buf = new Buffer.from(JSON.stringify(errMessage));
+				res.end(buf);
+        	}
         }
         else {
             console.log(newContact);
         }
     });
 
-	//newContact.save(function (error) {if (error) console.log ('Error when saving a new contact to the DB')});
-
-	var buf = new Buffer.from(JSON.stringify(newContact));
+	buf = new Buffer.from(JSON.stringify(newContact));
 	res.end(buf);
-
-	//console.log(newContact);
-	//return "OK";
 }
 
 function getAllContacts(res)
@@ -103,9 +112,8 @@ function getAllContacts(res)
 	var query = contactsModel.find({});
 	query.exec(function (err, docs) {
 	var buf2 = new Buffer.from(JSON.stringify(docs));
+	console.log(docs);
 	res.end(buf2);
 	});
-
-	//res.end();
 }
 
