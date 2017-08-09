@@ -32,11 +32,18 @@ header{
     padding-bottom: 30px;
     position:fixed;
     width:100%;
+    background: red; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(left, #D7BDE2 , #EC7063); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, #D7BDE2, #EC7063); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, #D7BDE2, #EC7063); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, #D7BDE2 , #EC7063); /* Standard syntax */
 }
 
 h2{
 	margin:0;
 	float: left;
+	color: white;
+	font-size:50px;
 }
 
 body{

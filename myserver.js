@@ -162,3 +162,28 @@ function getAllContacts(res)
 	});
 }
 
+function getAllContacts(res)
+{
+	var contacts;
+	var buf;
+	var query = contactsModel.find({}).sort({"contact.name" : 1});//get all documents for descending order according to contact's name
+	query.exec(function (err, docs) {
+		if (err) 
+		{ 
+			var errMessage = err.message;
+			console.log(errMessage);//printing to log the error message
+			buf = new Buffer.from(JSON.stringify(err.code));//sending the client the error code
+			res.setHeader('Access-Control-Allow-Origin', 'https://vm029600.cloudapp.net');
+			res.end(buf);
+		}
+		else
+		{
+			buf = new Buffer.from(JSON.stringify(docs));
+			console.log(docs);
+			res.setHeader('Access-Control-Allow-Origin', 'https://vm029600.cloudapp.net');
+			res.setHeader( 'content-length', buf.length );
+			res.end(buf);
+		}
+	
+	});
+}

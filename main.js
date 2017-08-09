@@ -25,9 +25,9 @@ function fillTableWithContacts(contacts){
 	for (var i = 0; i < contacts.length; i += 1) {
 	$('#contactsGrid').append(
 	  '<div class="contact-row">' +
-	    '<div class="col-md-4 cell">' + contacts[i].contact.name + '</div>' +
-	    '<div class="col-md-4 cell">' + contacts[i].contact.number + '</div>' +
-	  	'<div class="col-md-4 cell">' + contacts[i].contact.email + '</div>' +
+	    '<div class="col-md-4 cell" onmouseover = "mouseOverCell(this)" onmouseleave = "mouseLeaveCell(this)">' + contacts[i].contact.name + '</div>' +
+	    '<div class="col-md-4 cell" onmouseover = "mouseOverCell(this)" onmouseleave = "mouseLeaveCell(this)">' + contacts[i].contact.number + '</div>' +
+	  	'<div class="col-md-4 cell" onmouseover = "mouseOverCell(this)" onmouseleave = "mouseLeaveCell(this)">' + contacts[i].contact.email + '</div>' +
 	'</div>');
 	}
 }
@@ -62,4 +62,17 @@ function checkUser(){
 	    return false;
 	  }
 	}
+}
+
+function mouseOverCell(cell)
+{
+	var siblings = cell.parentNode.childNodes;
+	for (var i =0; i< siblings.length ; i++)
+		siblings[i].style.backgroundColor = '#DCDCDC';
+}
+
+function mouseLeaveCell(cell){
+	var siblings = cell.parentNode.childNodes;
+	for (var i =0; i< siblings.length ; i++)
+		siblings[i].style.backgroundColor = 'white';
 }
