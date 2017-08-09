@@ -14,7 +14,6 @@ function getAllContacts() {
         	contacts = data;
         	fillTableWithContacts(contacts);
     	}
-        
         else
         {
         	console.log("The request to get all contacts returned the response status: "+status+ ".");
@@ -36,7 +35,7 @@ function fillTableWithContacts(contacts){
 
 //Filtering and presenting only cntacts relevent to search. In sescending order.
 function searchFilter() {
-    var input, filter, row, i, name;
+    var input, filter, row, i, name, number;
     input = $('#searchBar');
     if(input[0])
     {
@@ -45,6 +44,7 @@ function searchFilter() {
 
     for (i = 0; i < rows.length; i++) {
 	        name = rows[i].firstChild.innerText;
+	        number = rows[i].firstChild.innerText;
 	        if (name.toUpperCase().indexOf(filter) > -1) {
 	            rows[i].style.display = "";
 	        } else {

@@ -18,6 +18,15 @@ http.createServer(function(req, res) {
 		{
 			getAllContacts(res);
 		}
+		else if(req.url === '/AddUser.png')
+		{
+			readImgFile(req.url, res, function(err, data){//data - the file's data
+				if(err)
+				{
+					res.end("Error during image loading.");
+				}
+			});
+		}
 		else
 		{
 			readFile(req.url, function(err, data){//data - the file's data
@@ -29,16 +38,9 @@ http.createServer(function(req, res) {
 				{
 					if(req.url === "/main.css")
 					{
-						res.writeHead(200,{'Content-Type': 'text/css'});
-						
+						res.setHeader( 'content-length', data.length );
+						res.setHeader('Content-Type', 'text/css');
 					}
-					else if(req.url === '/AddUser.png')
-					{
-						res.writeHead(200, {'Content-Type': 'image/png' });
-						console.log ("img!!!");
-		     			res.end(data, 'binary');
-					}
-
 					res.end(data);//response is file's data
 				}
 			});
@@ -56,6 +58,17 @@ function readFile(localPath, cb) {
 	fs.readFile(filePath, 'utf8', cb);
 }
 
+function readImgFile(localPath, res, cb) {
+    filePath = path.join(__dirname, localPath);
+	if(localPath === "/AddUser.png")
+	    {
+	    	var s = fs.createReadStream(filePath);
+		    s.on('open', function () {
+		        res.setHeader('Content-Type', 'image/png');
+		        s.pipe(res);
+		    });
+	    }
+}
 
 function connectToDB()
 {
@@ -118,6 +131,7 @@ function createNewContact(contact, res)
 				}
 				else
 				{
+					res.setHeader( 'content-length', data.length );
 					res.end(data);//response is file's data
 				}
 			});
@@ -144,6 +158,7 @@ function getAllContacts(res)
 			buf = new Buffer.from(JSON.stringify(docs));
 			console.log(docs);
 			res.setHeader('Access-Control-Allow-Origin', 'https://vm029600.cloudapp.net');
+			res.setHeader( 'content-length', buf.length );
 			res.end(buf);
 		}
 	
