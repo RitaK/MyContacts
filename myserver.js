@@ -27,6 +27,18 @@ http.createServer(function(req, res) {
 				}
 				else
 				{
+					if(req.url === "/main.css")
+					{
+						res.writeHead(200,{'Content-Type': 'text/css'});
+						
+					}
+					else if(req.url === '/AddUser.png')
+					{
+						res.writeHead(200, {'Content-Type': 'image/png' });
+						console.log ("img!!!");
+		     			res.end(data, 'binary');
+					}
+
 					res.end(data);//response is file's data
 				}
 			});

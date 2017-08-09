@@ -1,7 +1,11 @@
 
 var contacts;
 
-getAllContacts();
+$( document ).ready(function() {
+    getAllContacts();
+});
+
+
 
 function getAllContacts() {
     var result = $.get("http://vm029600.cloudapp.net:8080/getContacts", function(data, status){
