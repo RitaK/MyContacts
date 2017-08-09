@@ -17,7 +17,7 @@
 				<h2>My Contacts</h2>
 			</div>
 			<form >
-			  <input id="searchBar" onkeyup="searchFilter()" type="text" name="search" placeholder="Search..">
+			  <input id="searchBar" onkeyup="searchFilter()" type="text" name="search" placeholder="Search.." onSubmit="">
 			</form>
 		</header>
 		<div class="contacts-info">
@@ -34,7 +34,7 @@
 						<h4 class="modal-title">Create new contact</h4>
 					</div>
 					<div class="modal-body">
-						<form>
+						<form onsubmit="return checkUser()">
 							<div class="form-group">
 								<label for="name">Contact's name:</label>
 								<input type="text" class="form-control" id="name" name= "name">

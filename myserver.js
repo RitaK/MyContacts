@@ -111,20 +111,17 @@ function createNewContact(contact, res)
         	{
         		var errMessage = 'A contact with this name already exists.';
         		console.log (errMessage);
-        		buf = new Buffer.from(JSON.stringify(errMessage));
-				res.end(buf);
+
         	}
         	else
         	{
         		var errMessage  = 'Error when saving a new contact to the DB';
         		console.log (errMessage);
-        		buf = new Buffer.from(JSON.stringify(errMessage));
-				res.end(buf);
         	}
         }
-        else {
-            console.log(newContact);
-            readFile("/index.html", function(err, data){//data - the file's data
+        //In either way - the index.html is sent back.
+        console.log(newContact);
+        readFile("/index.html", function(err, data){//data - the file's data
 				if(err)
 				{
 					res.end("Path is incorrect.");
@@ -135,7 +132,7 @@ function createNewContact(contact, res)
 					res.end(data);//response is file's data
 				}
 			});
-        }
+
     });
 }
 

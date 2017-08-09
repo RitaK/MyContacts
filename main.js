@@ -11,7 +11,7 @@ function getAllContacts() {
     var result = $.get("http://vm029600.cloudapp.net:8080/getContacts", function(data, status){
     	if(status ==="success")
     	{
-        	contacts = data;
+        	contacts = JSON.parse(data);
         	fillTableWithContacts(contacts);
     	}
         else
@@ -22,13 +22,12 @@ function getAllContacts() {
 }
 
 function fillTableWithContacts(contacts){
-	var contactsObj = JSON.parse(contacts); 
-	for (var i = 0; i < contactsObj.length; i += 1) {
+	for (var i = 0; i < contacts.length; i += 1) {
 	$('#contactsGrid').append(
 	  '<div class="contact-row">' +
-	    '<div class="col-md-4 cell">' + contactsObj[i].contact.name + '</div>' +
-	    '<div class="col-md-4 cell">' + contactsObj[i].contact.number + '</div>' +
-	  	'<div class="col-md-4 cell">' + contactsObj[i].contact.email + '</div>' +
+	    '<div class="col-md-4 cell">' + contacts[i].contact.name + '</div>' +
+	    '<div class="col-md-4 cell">' + contacts[i].contact.number + '</div>' +
+	  	'<div class="col-md-4 cell">' + contacts[i].contact.email + '</div>' +
 	'</div>');
 	}
 }
@@ -42,8 +41,6 @@ function searchFilter() {
     	filter = input[0].value.toUpperCase();
     	var rows = $('.contact-row');
     for (i = 0; i < rows.length; i++) {
-	        //name = rows[i].firstChild.innerText;
-	        //number = rows[i].firstChild.innerText;
 	        rowChildren = rows[i].childNodes;
 	        name = rowChildren[0].innerText;
 	        number = rowChildren[1].innerText;
@@ -55,4 +52,14 @@ function searchFilter() {
     	}
     }
     
+}
+
+function checkUser(){
+	var name = $('#name')[0].value;
+	for (var i=0; i<contacts.length; i++) {
+	  if (contacts[i].contact.name === name) {
+	    alert("A contact with this name already exists.");
+	    return false;
+	  }
+	}
 }
