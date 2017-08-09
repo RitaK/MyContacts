@@ -124,12 +124,14 @@ function getAllContacts(res)
 			var errMessage = err.message;
 			console.log(errMessage);//printing to log the error message
 			buf = new Buffer.from(JSON.stringify(err.code));//sending the client the error code
+			res.setHeader('Access-Control-Allow-Origin', 'https://vm029600.cloudapp.net');
 			res.end(buf);
 		}
 		else
 		{
 			buf = new Buffer.from(JSON.stringify(docs));
 			console.log(docs);
+			res.setHeader('Access-Control-Allow-Origin', 'https://vm029600.cloudapp.net');
 			res.end(buf);
 		}
 	

@@ -4,7 +4,7 @@ var contacts;
 getAllContacts();
 
 function getAllContacts() {
-    var result = $.get("http://localhost:8080/getContacts", function(data, status){
+    var result = $.get("http://vm029600.cloudapp.net:8080/getContacts", function(data, status){
     	if(status ==="success")
     	{
         	contacts = data;
