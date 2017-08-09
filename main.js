@@ -35,17 +35,19 @@ function fillTableWithContacts(contacts){
 
 //Filtering and presenting only cntacts relevent to search. In sescending order.
 function searchFilter() {
-    var input, filter, row, i, name, number;
+    var input, filter, row, i, name, number, rowChildren;
     input = $('#searchBar');
     if(input[0])
     {
     	filter = input[0].value.toUpperCase();
     	var rows = $('.contact-row');
-
     for (i = 0; i < rows.length; i++) {
-	        name = rows[i].firstChild.innerText;
-	        number = rows[i].firstChild.innerText;
-	        if (name.toUpperCase().indexOf(filter) > -1) {
+	        //name = rows[i].firstChild.innerText;
+	        //number = rows[i].firstChild.innerText;
+	        rowChildren = rows[i].childNodes;
+	        name = rowChildren[0].innerText;
+	        number = rowChildren[1].innerText;
+	        if (name.toUpperCase().indexOf(filter) > -1 || number.toUpperCase().indexOf(filter) > -1) {
 	            rows[i].style.display = "";
 	        } else {
 	            rows[i].style.display = "none";
