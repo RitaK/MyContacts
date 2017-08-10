@@ -47,7 +47,7 @@ h2{
 }
 
 body{
-	font-family: 'Patua One', cursive;
+	font-family: 'Roboto', sans-serif;
     line-height: 3rem;
     font-size: 16px;
 }
@@ -87,3 +87,11 @@ body{
 #searchBar:focus {
     width: 60%;
 }
+
+ #deleteAllContactsBtn{
+  	background-color: white;
+    margin: 20px;
+    top: 80%;
+    left: 5%;
+    position: fixed;
+}  

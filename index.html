@@ -10,6 +10,7 @@
 		<script language = "JavaScript" src="main.js"></script>
 		<link rel="stylesheet" type="text/css" href="main.css" media="screen">
 		<link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto" rel="stylesheet">
 	</head>
 	<body>
 		<header >
@@ -23,7 +24,7 @@
 		<div class="contacts-info">
 			<div id = "contactsGrid">
 			</div>
-			<button type="button" id= "addUserBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newContactModal"><img src="AddUser.png"></button>
+			<button type="button" id= "addUserBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newContactModal" tooltip = "Create contact"><img src="AddUser.png"></button>
 			<!--popup modal-->
 			<div id="newContactModal" class="modal fade" role="dialog">
 			  <div class="modal-dialog">
@@ -34,7 +35,7 @@
 						<h4 class="modal-title">Create new contact</h4>
 					</div>
 					<div class="modal-body">
-						<form onsubmit="return checkUser()">
+						<form onsubmit="return checkUser()" >
 							<div class="form-group">
 								<label for="name">Contact's name:</label>
 								<input type="text" class="form-control" id="name" name= "name">

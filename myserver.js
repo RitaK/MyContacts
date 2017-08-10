@@ -36,6 +36,7 @@ http.createServer(function(req, res) {
 				}
 				else
 				{
+					res.setHeader('Cache-Control', 'no-cache, no-store');
 					if(req.url === "/main.css")
 					{
 						res.setHeader( 'content-length', data.length );
@@ -60,7 +61,7 @@ function readFile(localPath, cb) {
 
 function readImgFile(localPath, res, cb) {
     filePath = path.join(__dirname, localPath);
-	if(localPath === "/AddUser.png")
+	if(localPath === "/AddUser.png" || localPath ==="/removeButton.png")
 	    {
 	    	var s = fs.createReadStream(filePath);
 		    s.on('open', function () {
@@ -129,6 +130,7 @@ function createNewContact(contact, res)
 				else
 				{
 					res.setHeader( 'content-length', data.length );
+					res.setHeader('Cache-Control', 'no-cache, no-store');
 					res.end(data);//response is file's data
 				}
 			});
@@ -148,6 +150,7 @@ function getAllContacts(res)
 			console.log(errMessage);//printing to log the error message
 			buf = new Buffer.from(JSON.stringify(err.code));//sending the client the error code
 			res.setHeader('Access-Control-Allow-Origin', 'https://vm029600.cloudapp.net');
+			res.setHeader('Cache-Control', 'no-cache, no-store');
 			res.end(buf);
 		}
 		else
@@ -156,32 +159,7 @@ function getAllContacts(res)
 			console.log(docs);
 			res.setHeader('Access-Control-Allow-Origin', 'https://vm029600.cloudapp.net');
 			res.setHeader( 'content-length', buf.length );
-			res.end(buf);
-		}
-	
-	});
-}
-
-function getAllContacts(res)
-{
-	var contacts;
-	var buf;
-	var query = contactsModel.find({}).sort({"contact.name" : 1});//get all documents for descending order according to contact's name
-	query.exec(function (err, docs) {
-		if (err) 
-		{ 
-			var errMessage = err.message;
-			console.log(errMessage);//printing to log the error message
-			buf = new Buffer.from(JSON.stringify(err.code));//sending the client the error code
-			res.setHeader('Access-Control-Allow-Origin', 'https://vm029600.cloudapp.net');
-			res.end(buf);
-		}
-		else
-		{
-			buf = new Buffer.from(JSON.stringify(docs));
-			console.log(docs);
-			res.setHeader('Access-Control-Allow-Origin', 'https://vm029600.cloudapp.net');
-			res.setHeader( 'content-length', buf.length );
+			res.setHeader('Cache-Control', 'no-cache, no-store');
 			res.end(buf);
 		}
 	
