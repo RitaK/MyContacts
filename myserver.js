@@ -121,7 +121,7 @@ function createNewContact(contact, res)
         	}
         }
         //In either way - the index.html is sent back.
-        console.log(newContact);
+        console.log(newContact + " was created");
         readFile("/index.html", function(err, data){//data - the file's data
 				if(err)
 				{
@@ -156,7 +156,7 @@ function getAllContacts(res)
 		else
 		{
 			buf = new Buffer.from(JSON.stringify(docs));
-			console.log(docs);
+			//console.log(docs);
 			res.setHeader('Access-Control-Allow-Origin', 'https://vm029600.cloudapp.net');
 			res.setHeader( 'content-length', buf.length );
 			res.setHeader('Cache-Control', 'no-cache, no-store');
