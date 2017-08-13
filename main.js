@@ -59,11 +59,18 @@ function searchFilter() {
 
 function checkUser(){
 	var name = $('#name')[0].value;
+	var number = $('#phoneNumber')[0].value;
+	var email = $('#email')[0].value;
+	if(name === "" || number === "" )
+		{
+			alert("Name and number fields cannot be empty.");
+		    return false;
+		}
 	for (var i=0; i<contacts.length; i++) {
-	  if (contacts[i].contact.name === name) {
-	    alert("A contact with this name already exists.");
-	    return false;
-	  }
+			if (contacts[i].contact.name === name) {
+			    alert("A contact with this name already exists.");
+			    return false;
+			  }
 	}
 }
 
