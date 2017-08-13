@@ -23,11 +23,14 @@ function getAllContacts() {
 
 function fillTableWithContacts(contacts){
 	for (var i = 0; i < contacts.length; i += 1) {
+		var name = (contacts[i].contact.name !== "") ? contacts[i].contact.name: "-";
+		var number = (contacts[i].contact.number !== "") ? contacts[i].contact.number: "-";
+		var email = (contacts[i].contact.email !== "") ? contacts[i].contact.email: "-";
 	$('#contactsGrid').append(
 	  '<div class="contact-row">' +
-	    '<div class="col-md-4 cell" onmouseover = "mouseOverCell(this)" onmouseleave = "mouseLeaveCell(this)">' + contacts[i].contact.name + '</div>' +
-	    '<div class="col-md-4 cell" onmouseover = "mouseOverCell(this)" onmouseleave = "mouseLeaveCell(this)">' + contacts[i].contact.number + '</div>' +
-	  	'<div class="col-md-4 cell" onmouseover = "mouseOverCell(this)" onmouseleave = "mouseLeaveCell(this)">' + contacts[i].contact.email + '</div>' +
+	    '<div class="col-md-4 cell" onmouseover = "mouseOverCell(this)" onmouseleave = "mouseLeaveCell(this)">' + name + '</div>' +
+	    '<div class="col-md-4 cell" onmouseover = "mouseOverCell(this)" onmouseleave = "mouseLeaveCell(this)">' + number + '</div>' +
+	  	'<div class="col-md-4 cell" onmouseover = "mouseOverCell(this)" onmouseleave = "mouseLeaveCell(this)">' + email + '</div>' +
 	'</div>');
 	}
 }
