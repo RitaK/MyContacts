@@ -45,7 +45,7 @@ function searchFilter() {
     	var rows = $('.contact-row');
     for (i = 0; i < rows.length; i++) {
 	        rowChildren = rows[i].childNodes;
-	        name = rowChildren[0].innerText;
+	        name = rowChildren[0].innerText; 
 	        number = rowChildren[1].innerText;
 	        if (name.toUpperCase().indexOf(filter) > -1 || number.toUpperCase().indexOf(filter) > -1) {
 	            rows[i].style.display = "";
